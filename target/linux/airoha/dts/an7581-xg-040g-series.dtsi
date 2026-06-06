@@ -26,9 +26,9 @@
     };
 
     chosen {
-        bootargs = "console=ttyS0,115200n8 loglevel=8  earlycon";
+        bootargs = "console=ttyS0,115200n8 loglevel=4 earlycon coherent_pool=4M";
         stdout-path = "serial0:115200n8";
-        bootargs-append = " ubi.mtd=rootfs,2048 rootfstype=squashfs ubi.block=0,rootfs ro init=/etc/preinit";
+        bootargs-append = " ubi.mtd=rootfs,2048 rootfstype=squashfs ubi.block=0,rootfs ro init=/etc/preinit skew_tick=1 nohz=on rcu_nocbs=0-3 irqaffinity=0,1";
     };
 
 	leds {
@@ -218,6 +218,7 @@
 
 &gsw_port1{
 	status = "okay";
+	local-mac-address = [00 11 22 33 44 01];
 };
 
 &gsw_phy1 {
@@ -234,6 +235,7 @@
 &gsw_port2{
 	status = "okay";
 	label = "lan2";
+	local-mac-address = [00 11 22 33 44 02];
 };
 
 &gsw_phy2 {
@@ -251,6 +253,7 @@
 &gsw_port3{
 	status = "okay";
 	label = "lan3";
+	local-mac-address = [00 11 22 33 44 03];
 };
 
 &gsw_phy3 {
@@ -268,6 +271,7 @@
 &gsw_port4{
 	status = "okay";
 	label = "lan4";
+	local-mac-address = [00 11 22 33 44 04];
 };
 
 &gsw_phy4 {

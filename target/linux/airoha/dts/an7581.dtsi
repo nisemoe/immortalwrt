@@ -27,37 +27,37 @@
 
 		npu_binary: npu-binary@84000000 {
 			no-map;
-			reg = <0x0 0x84000000 0x0 0xa00000>;
+			reg = <0x0 0x84000000 0x0 0x1400000>; /* 10MB -> 20MB */
 		};
 
 		qdma0_buf: qdma0-buf@87000000 {
 			no-map;
-			reg = <0x0 0x87000000 0x0 0x2000000>;
+			reg = <0x0 0x87000000 0x0 0x8000000>; /* 32MB -> 128MB */
 		};
 
-		qdma1_buf: qdma1-buf@89000000 {
+		qdma1_buf: qdma1-buf@8f000000 {
 			no-map;
-			reg = <0x0 0x89000000 0x0 0x1000000>;
+			reg = <0x0 0x8f000000 0x0 0x4000000>; /* 16MB -> 64MB */
 		};
 
-		npu_pkt: npu-pkt@8a000000 {
+		npu_pkt: npu-pkt@93000000 {
 			no-map;
-			reg = <0x0 0x8a000000 0x0 0x1000000>;
+			reg = <0x0 0x93000000 0x0 0x4000000>; /* 16MB -> 64MB */
 		};
 
-		npu_txpkt: npu-txpkt@8b000000 {
+		npu_txpkt: npu-txpkt@97000000 {
 			no-map;
-			reg = <0x0 0x8b000000 0x0 0x1000000>;
+			reg = <0x0 0x97000000 0x0 0x4000000>; /* 16MB -> 64MB */
 		};
 
-		npu_txbufid: npu-txbufid@8c000000 {
+		npu_txbufid: npu-txbufid@9b000000 {
 			no-map;
-			reg = <0x0 0x8c000000 0x0 0x6800>;
+			reg = <0x0 0x9b000000 0x0 0x10000>; /* 26KB -> 64KB */
 		};
 
-		npu_ba: npu-ba@8c06800 {
+		npu_ba: npu-ba@9b010000 {
 			no-map;
-			reg = <0x0 0x8c06800 0x0 0x200000>;
+			reg = <0x0 0x9b010000 0x0 0x400000>; /* 2MB -> 4MB */
 		};
 	};
 
@@ -148,8 +148,9 @@
 
 		l2: l2-cache {
 			compatible = "cache";
-			cache-size = <0x80000>;
+			cache-size = <0x100000>; /* 512KB -> 1MB */
 			cache-line-size = <64>;
+			cache-sets = <1024>;
 			cache-level = <2>;
 			cache-unified;
 		};
@@ -170,79 +171,54 @@
 		compatible = "operating-points-v2";
 		opp-shared;
 
-		opp-500000000 {
-			opp-hz = /bits/ 64 <500000000>;
+		opp-600000000 {
+			opp-hz = /bits/ 64 <600000000>;
 			required-opps = <&smcc_opp0>;
 		};
 
-		opp-550000000 {
-			opp-hz = /bits/ 64 <550000000>;
+		opp-700000000 {
+			opp-hz = /bits/ 64 <700000000>;
 			required-opps = <&smcc_opp1>;
 		};
 
-		opp-600000000 {
-			opp-hz = /bits/ 64 <600000000>;
+		opp-800000000 {
+			opp-hz = /bits/ 64 <800000000>;
 			required-opps = <&smcc_opp2>;
 		};
 
-		opp-650000000 {
-			opp-hz = /bits/ 64 <650000000>;
+		opp-900000000 {
+			opp-hz = /bits/ 64 <900000000>;
 			required-opps = <&smcc_opp3>;
 		};
 
-		opp-7000000000 {
-			opp-hz = /bits/ 64 <700000000>;
+		opp-1000000000 {
+			opp-hz = /bits/ 64 <1000000000>;
 			required-opps = <&smcc_opp4>;
 		};
 
-		opp-7500000000 {
-			opp-hz = /bits/ 64 <750000000>;
+		opp-1100000000 {
+			opp-hz = /bits/ 64 <1100000000>;
 			required-opps = <&smcc_opp5>;
 		};
 
-		opp-8000000000 {
-			opp-hz = /bits/ 64 <800000000>;
+		opp-1200000000 {
+			opp-hz = /bits/ 64 <1200000000>;
 			required-opps = <&smcc_opp6>;
 		};
 
-		opp-8500000000 {
-			opp-hz = /bits/ 64 <850000000>;
+		opp-1300000000 {
+			opp-hz = /bits/ 64 <1300000000>;
 			required-opps = <&smcc_opp7>;
 		};
 
-		opp-9000000000 {
-			opp-hz = /bits/ 64 <900000000>;
+		opp-1400000000 {
+			opp-hz = /bits/ 64 <1400000000>;
 			required-opps = <&smcc_opp8>;
 		};
 
-		opp-9500000000 {
-			opp-hz = /bits/ 64 <950000000>;
+		opp-1500000000 {
+			opp-hz = /bits/ 64 <1500000000>;
 			required-opps = <&smcc_opp9>;
-		};
-
-		opp-10000000000 {
-			opp-hz = /bits/ 64 <1000000000>;
-			required-opps = <&smcc_opp10>;
-		};
-
-		opp-10500000000 {
-			opp-hz = /bits/ 64 <1050000000>;
-			required-opps = <&smcc_opp11>;
-		};
-
-		opp-11000000000 {
-			opp-hz = /bits/ 64 <1100000000>;
-			required-opps = <&smcc_opp12>;
-		};
-
-		opp-11500000000 {
-			opp-hz = /bits/ 64 <1150000000>;
-			required-opps = <&smcc_opp13>;
-		};
-
-		opp-12000000000 {
-			opp-hz = /bits/ 64 <1200000000>;
-			required-opps = <&smcc_opp14>;
 		};
 	};
 
@@ -288,26 +264,6 @@
 		smcc_opp9: opp9 {
 			opp-level = <9>;
 		};
-
-		smcc_opp10: opp10 {
-			opp-level = <10>;
-		};
-
-		smcc_opp11: opp11 {
-			opp-level = <11>;
-		};
-
-		smcc_opp12: opp12 {
-			opp-level = <12>;
-		};
-
-		smcc_opp13: opp13 {
-			opp-level = <13>;
-		};
-
-		smcc_opp14: opp14 {
-			opp-level = <14>;
-		};
 	};
 
 	timer {
@@ -321,27 +277,41 @@
 
 	thermal-zones {
 		cpu_thermal: cpu-thermal {
-			polling-delay-passive = <0>;
-			polling-delay = <0>;
+			polling-delay-passive = <250>; /* 主动监控 */
+			polling-delay = <1000>;
 
 			thermal-sensors = <&thermal 0>;
 
 			trips {
+				cpu_alert: cpu-alert {
+					temperature = <80000>; /* 80°C警告 */
+					hysteresis = <2000>;
+					type = "passive";
+				};
+
 				cpu_hot: cpu-hot {
 					temperature = <95000>;
-					hysteresis = <1000>;
+					hysteresis = <2000>;
 					type = "hot";
 				};
 
 				cpu-critical {
-					temperature = <110000>;
-					hysteresis = <1000>;
+					temperature = <105000>; /* 提高到105°C */
+					hysteresis = <2000>;
 					type = "critical";
 				};
 			};
 
 			cooling-maps {
 				map0 {
+					trip = <&cpu_alert>;
+					cooling-device = <&cpu0 THERMAL_NO_LIMIT 3>,
+							 <&cpu1 THERMAL_NO_LIMIT 3>,
+							 <&cpu2 THERMAL_NO_LIMIT 3>,
+							 <&cpu3 THERMAL_NO_LIMIT 3>;
+				};
+
+				map1 {
 					trip = <&cpu_hot>;
 					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
 							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
